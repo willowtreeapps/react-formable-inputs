@@ -4,6 +4,6 @@ import { render } from 'react-dom';
 import { Select } from 'react-formable-inputs';
 
 render(
-    <Select name="colors" />,
+    <Select />,
     document.getElementById('app')
 );

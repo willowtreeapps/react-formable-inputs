@@ -4,8 +4,6 @@ import classNames from 'classnames';
 
 export default class Select extends React.Component {
 
-    displayName: 'Select'
-
     render() {
         const classes = classNames(
             'select-wrapper',
