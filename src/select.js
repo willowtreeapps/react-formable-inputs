@@ -1,27 +1,35 @@
 import React, { PropTypes } from 'react';
 import JWSelect from 'react-select';
+import classNames from 'classnames';
 
 export default class Select extends React.Component {
 
     displayName: 'Select'
 
-    renderOption(option) {
-        return <option value="xx">Value X</option>
-    }
-
     render() {
-        return <select className="select" options={[]}>
-            {this.props.options.map(option => {
-                this.renderOption(option);
-            })};
-        </select>;
+        const classes = classNames(
+            'select-wrapper',
+            {
+                error: this.props.errors.length,
+                disabled: this.props.disabled,
+                [`${this.props.className}`]: this.props.className
+            }
+        );
+
+        return <div className={classes}>
+            <JWSelect {...this.props} />
+        </div>
     }
 }
 
 Select.propTypes = {
-    options: PropTypes.array
+    options: PropTypes.array,
+    errors: PropTypes.array,
+    className: PropTypes.string,
+    disabled: PropTypes.bool
 }
 
 Select.defaultProps = {
-    options: []
+    options: [],
+    errors: []
 }
