@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import JWSelect from 'react-select';
 
-export default React.createClass({
-    displayName: 'Select',
+export default class Select extends React.Component {
 
-    propTypes: {},
+    displayName: 'Select'
+
+    renderOption(option) {
+        return <option value="xx">Value X</option>
+    }
 
     render() {
-        return <p className={'select'}>I am a select</p>;
+        return <select className="select" options={[]}>
+            {this.props.options.map(option => {
+                this.renderOption(option);
+            })};
+        </select>;
     }
-});
+}
+
+Select.propTypes = {
+    options: PropTypes.array
+}
+
+Select.defaultProps = {
+    options: []
+}
