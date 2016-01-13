@@ -14,16 +14,16 @@ describe('Select', () => {
         { value: 'three', label: 'Three' }
     ];
 
-    it('can recieve a default value', () => {
+    it('can receive a default value', () => {
         const select = TestUtils.renderIntoDocument(<Select options={options} defaultValue={'two'} />);
 
-        expect(select.state.value).toBe('two');
+        expect(select.getValue()).toBe('two');
     });
 
-    it('can recieve a default value', () => {
+    it('does not set value when none is present', () => {
         const select = TestUtils.renderIntoDocument(<Select options={options} />);
 
-        expect(select.state.value).toBe(undefined);
+        expect(select.getValue()).toBe(undefined);
     });
 
     it('can be asked for its value by owning form', () => {
