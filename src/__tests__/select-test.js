@@ -8,6 +8,12 @@ import TestUtils from 'react-addons-test-utils';
 const Select = require('../select').default;
 
 describe('Select', () => {
+    const options = [
+        { value: 'one', label: 'One' },
+        { value: 'two', label: 'Two' },
+        { value: 'three', label: 'Three' }
+    ];
+
     it('renders with default classname', () => {
         let select, selectDom;
 
@@ -46,5 +52,14 @@ describe('Select', () => {
         select = TestUtils.renderIntoDocument(<Select errors={['not awesome']} />);
         selectDom = ReactDOM.findDOMNode(select);
         expect(selectDom.className.indexOf('error')).not.toBe(-1);
+    });
+
+    it('propogates value change externally', () => {
+        let select;
+        const onChangeMock = jest.genMockFn();
+
+        select = TestUtils.renderIntoDocument(<Select onChange={onChangeMock} options={options} />);
+        select.onChange('December');
+        expect(onChangeMock).toBeCalledWith('December');
     });
 });
