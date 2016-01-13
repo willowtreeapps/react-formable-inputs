@@ -46,9 +46,11 @@ export default class Select extends React.Component {
     }
 
     render() {
+        debugger;
         return <div className={this.getClasses()}>
             <JWSelect {...this.props}
-                onChange={this.onChange.bind(this)} />
+                onChange={this.onChange.bind(this)}
+                value={this.state.value} />
         </div>
     }
 }

@@ -9,6 +9,6 @@ const options = [
 ];
 
 render(
-    <Select options={options} value="one" />,
+    <Select options={options} defaultValue="one" />,
     document.getElementById('app')
 );
