@@ -67,7 +67,7 @@ describe('Select', () => {
         selectDom = ReactDOM.findDOMNode(select);
         expect(selectDom.className.indexOf('error')).toBe(-1);
 
-        select = TestUtils.renderIntoDocument(<Select errors={['not awesome']} />);
+        select = TestUtils.renderIntoDocument(<Select fieldErrors={['not awesome']} />);
         selectDom = ReactDOM.findDOMNode(select);
         expect(selectDom.className.indexOf('error')).not.toBe(-1);
     });
