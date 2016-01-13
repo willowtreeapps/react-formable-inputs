@@ -26,6 +26,12 @@ describe('Select', () => {
         expect(select.state.value).toBe(undefined);
     });
 
+    it('can be asked for its value by owning form', () => {
+        const select = TestUtils.renderIntoDocument(<Select options={options} defaultValue={'two'} />);
+
+        expect(select.getValue()).toBe('two');
+    });
+
     it('renders with default classname', () => {
         let select, selectDom;
 

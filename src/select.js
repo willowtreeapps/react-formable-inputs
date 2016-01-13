@@ -25,6 +25,15 @@ export default class Select extends React.Component {
         });
     }
 
+    /**
+     * Form interface method for getting the value of the input
+     *
+     * @return {(string|number)} the value of the select
+     */
+    getValue() {
+        return this.state.value;
+    }
+
     getClasses() {
         return classNames(
             'select-wrapper',
