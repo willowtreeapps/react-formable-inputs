@@ -5,6 +5,13 @@ import identity from './helpers/identity';
 
 export default class Select extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: props.defaultValue
+        };
+    }
+
     /**
      * Handle internal value change before continuing externally.
      *
@@ -39,10 +46,14 @@ export default class Select extends React.Component {
 
 Select.propTypes = {
     options: PropTypes.array,
-    errors: PropTypes.array,
+    defaultValue: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number
+    ]),
+    onChange: PropTypes.func,
     className: PropTypes.string,
-    disabled: PropTypes.bool,
-    onChange: PropTypes.func
+    errors: PropTypes.array,
+    disabled: PropTypes.bool
 }
 
 Select.defaultProps = {

@@ -14,6 +14,18 @@ describe('Select', () => {
         { value: 'three', label: 'Three' }
     ];
 
+    it('can recieve a default value', () => {
+        const select = TestUtils.renderIntoDocument(<Select options={options} defaultValue={'two'} />);
+
+        expect(select.state.value).toBe('two');
+    });
+
+    it('can recieve a default value', () => {
+        const select = TestUtils.renderIntoDocument(<Select options={options} />);
+
+        expect(select.state.value).toBe(undefined);
+    });
+
     it('renders with default classname', () => {
         let select, selectDom;
 
