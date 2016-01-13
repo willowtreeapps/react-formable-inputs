@@ -3,7 +3,12 @@ import { render } from 'react-dom';
 
 import { Select } from 'react-formable-inputs';
 
+const options = [
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' }
+];
+
 render(
-    <Select />,
+    <Select options={options} />,
     document.getElementById('app')
 );
