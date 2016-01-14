@@ -21,6 +21,21 @@ describe('IdentityWrapper', () => {
         expect(iden.getValue()).toEqual('basic');
     });
 
+    it('renders a basic textarea', () => {
+        const iden = TestUtils.renderIntoDocument(
+            <IdentityWrapper>
+                <textarea />
+            </IdentityWrapper>
+        );
+
+        expect(iden.getValue()).toEqual('');
+
+        let textarea = TestUtils.findRenderedDOMComponentWithTag(iden, 'textarea');
+
+        textarea.value = 'basic';
+        expect(iden.getValue()).toEqual('basic');
+    });
+
     it('renders a basic checkbox input', () => {
         const iden = TestUtils.renderIntoDocument(
             <IdentityWrapper>
