@@ -1,3 +1,6 @@
 // Components
+import Select from './select';
 
-export const Input = 'Hello';
+const Input = 'Hello';
+
+export { Input, Select };
