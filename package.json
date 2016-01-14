@@ -18,6 +18,7 @@
     "url": "https://github.com/willowtreeapps/react-formable-inputs/issues"
   },
   "dependencies": {
+    "warning": "^2.1.0",
     "classnames": "^2.2.3",
     "react-select": "^0.9.1"
   },
