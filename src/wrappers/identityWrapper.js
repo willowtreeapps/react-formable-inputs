@@ -16,6 +16,42 @@ const IdentityWrapper = React.createClass({
         children: PropTypes.node
     },
 
+    getDomValue(child) {
+        if (!child.tagName || !child.type) {
+            warning(false, `Components passed into ${this.constructor.displayName} must have a tagName and type associated with them`);
+            return void 0;
+        }
+
+        const tagName = child.tagName.toLowerCase();
+        const type = child.type.toLowerCase();
+
+        if (tagName === 'input') {
+            if (type === 'checkbox') return child.checked;
+            if (type === 'radio') {
+                return child.checked ? child.value : void 0;
+            }
+            return child.value;
+        }
+
+        if (tagName === 'select') {
+            if (type === 'select-multiple') {
+                const select = ReactDOM.findDOMNode(child);
+                const options = Array.prototype.slice.call(select.options);
+
+                return options.filter((option) => option.selected)
+                              .map((option) => option.value);
+            }
+            return child.value;
+        }
+
+        if (tagName === 'textarea') {
+            return child.value;
+        }
+
+        warning(false, `Unsupported component ${tagName} in ${this.constructor.displayName}`);
+        return void 0;
+    },
+
     /**
        Gets the values (that it can) from all child components. Does
        not do any filtering or anything fancy.
@@ -27,44 +63,8 @@ const IdentityWrapper = React.createClass({
         const values = Object.keys(this.refs).map((refId) => {
             const child = this.refs[refId];
 
-            // Non-DOM component that implements `getValue()`
-            if (typeof child.getValue === 'function') {
-                return child.getValue();
-            }
-
-            if (!child.tagName || !child.type) {
-                warning(false, `Components passed into ${this.constructor.displayName} must have a tagName and type associated with them`);
-                return void 0;
-            }
-
-            const tagName = child.tagName.toLowerCase();
-            const type = child.type.toLowerCase();
-
-            if (tagName === 'input') {
-                if (type === 'checkbox') return child.checked;
-                if (type === 'radio') {
-                    return child.checked ? child.value : void 0;
-                }
-                return child.value;
-            }
-
-            if (tagName === 'select') {
-                if (type === 'select-multiple') {
-                    const select = ReactDOM.findDOMNode(child);
-                    const options = Array.prototype.slice.call(select.options);
-
-                    return options.filter((option) => option.selected)
-                                  .map((option) => option.value);
-                }
-                return child.value;
-            }
-
-            if (tagName === 'textarea') {
-                return child.value;
-            }
-
-            warning(false, `Unsupported component ${tagName} in ${this.constructor.displayName}`);
-            return void 0;
+            return typeof child.getValue === 'function' ? child.getValue() :
+                                                          this.getDomValue(child);
         }).filter((value) => typeof value !== 'undefined');
 
         warning(values.length <= 1, `${this.constructor.displayName} should only wrap one input type. Returning only the first valid value`);
