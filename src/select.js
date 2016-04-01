@@ -38,7 +38,7 @@ export default class Select extends React.Component {
         return classNames(
             'select-wrapper',
             {
-                error: this.props.fieldErrors.length,
+                error: (this.props.fieldErrors || []).length,
                 disabled: this.props.disabled,
                 [`${this.props.className}`]: this.props.className
             }
@@ -68,6 +68,5 @@ Select.propTypes = {
 
 Select.defaultProps = {
     options: [],
-    fieldErrors: [],
     onChange: identity
 }
