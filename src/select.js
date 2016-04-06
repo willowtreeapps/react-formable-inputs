@@ -12,6 +12,14 @@ export default class Select extends React.Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps && nextProps.value) {
+            this.setState({
+                value: nextProps.value
+            });
+        }
+    }
+
     /**
      * Handle internal value change before continuing externally.
      *
